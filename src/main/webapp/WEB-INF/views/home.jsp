@@ -7,18 +7,18 @@
 <title>Home</title>
 </head>
 <body>
-<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: contain, cover;"> 
+<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: cover, center; "> 
 
-	<h1>Welcome to the Film Database Management Home Page</h1>
+	<h1 style="font-famliy:fantasy; color:gold;text-align:center;"><i>Welcome to the Film Database Management Home Page</i></h1>
 	<br>
-	<table>
+	<table style="align-items:center;">
 		<tr>
 			<td style="text-align:center;"><a href="read.do">Query the Film Database by ID</a></td>
 				
 		<tr>
 
 		<tr>
-			<td style="text-align:center;"><a href="keyword.do">Query the Film Database by Keyword</a></td>
+			<td style="align-text:center;"><a href="keyword.do">Query the Film Database by Keyword</a></td>
 				
 		<tr>
 

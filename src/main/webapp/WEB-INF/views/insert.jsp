@@ -8,8 +8,8 @@
 <title>Add Film</title>
 
 <body>
-	<div>
-		<h3>Add New Film</h3>
+	<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: cover, center; "> 
+		<h3 style="font-family:fantasy; color:gold;">Add New Film</h3>
 		<h4>Please provide the following details:</h4>
 		<form action="NewFilm.do" method="post">
 			<label for="title">Title:</label> <input type="text" name="title" /><br>

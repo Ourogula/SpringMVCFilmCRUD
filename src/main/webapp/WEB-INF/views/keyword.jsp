@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div>
+<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: cover, center; "> 
 		<h3>Search by Keyword</h3>
 		<form action="results.do" method="POST">
 			<label for="identifier">Keyword: </label> 
