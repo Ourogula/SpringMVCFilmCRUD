@@ -16,5 +16,6 @@ Maven,DAO
 
 # Lessons learned
 
-we learned communication is paramount. alot of our stumbling was due to not knowing what the other was working on. so alot of items were reworked. 
+We learned communication is paramount. alot of our stumbling was due to not knowing what the other was working on. so alot of items were reworked. 
 
+Learned about 'git merge'. may not be a good function all the time, but it did help us with one issue we had while trying to push a file. 

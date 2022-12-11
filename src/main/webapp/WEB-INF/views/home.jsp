@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Welcome to the Film Database Management Home Page</h1>
 
+	<h1 style="color:CornflowerBlue;">Welcome to the Film Database Management Home Page</h1>
+<p style="background-image: url('https://www.architecturelab.net/wp-content/uploads/2020/10/Home-Theater-Design-Software-1.jpg');">
 	<table>
 		<tr>
 			<td><a href="read.do">Query the Film Database by ID</a></td>
