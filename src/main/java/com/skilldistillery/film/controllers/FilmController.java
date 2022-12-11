@@ -36,11 +36,6 @@ public String readPage() {
 	return "WEB-INF/views/read.jsp";
 }
 	
-	@ RequestMapping(path="delete.do")
-	public String deleteWebpage () {
-		return "WEB-INF/views/delete.jsp";
-	}
-	
 	@ RequestMapping(path="insert.do")
 	public String insertForm () {
 		return "WEB-INF/views/insert.jsp";
@@ -104,13 +99,20 @@ public String readPage() {
 		double rateNum = Double.parseDouble(rentRate);
 		int lengthNum = Integer.parseInt(length);
 		double replacementCostNum = Double.parseDouble(replaceCost);
-		String features = (String) specFeatures.subSequence(0, specFeatures.length() - 12);
+		String features;
+		if (specFeatures.length() > 12) {
+		features = (String) specFeatures.subSequence(0, specFeatures.length() - 12);
+		} else {
+			features = null;
+		}
 		List<Actor> actors = null;
 		try {
 		actors = db.findActorsByFilmId(filmId);
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
+		
+		System.out.println(id);
 		
 		updateFilm.setFilmId(filmId);
 		updateFilm.setTitle(title);
@@ -146,6 +148,8 @@ public String readPage() {
 		try {
 			String language = ((FilmDAOImpl)db).findLanguageByID(updateFilm.getFilmId());
 			mv.addObject("language", language);
+			String categories = ((FilmDAOImpl)db).findCategoriesById(updateFilm.getFilmId());
+			mv.addObject("categories", categories);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,6 +181,8 @@ public String readPage() {
 		try {
 			String language = ((FilmDAOImpl)db).findLanguageByID(film.getFilmId());
 			mv.addObject("language", language);
+			String categories = ((FilmDAOImpl)db).findCategoriesById(film.getFilmId());
+			mv.addObject("categories", categories);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,36 +206,42 @@ public String readPage() {
 	
 	
 	//Delete a Film from the Database
-	@RequestMapping(path="deleteForm.do", method = RequestMethod.GET)
-	public ModelAndView deleteForm () {
+	@RequestMapping(path="delete.do", method = RequestMethod.POST)
+	public ModelAndView deleteForm (String filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		boolean success = false;
-		int filmId = 1005;
+		int id = Integer.parseInt(filmId);
 		Film deletedFilm = null;
 		String language = "";
+		String categories = "";
 		try {
-			deletedFilm = db.findFilmById(filmId);
+			deletedFilm = db.findFilmById(id);
 			success = db.deleteFilm(deletedFilm);
-			language = ((FilmDAOImpl)db).findLanguageByID(filmId);
+			language = ((FilmDAOImpl)db).findLanguageByID(id);
+			categories = ((FilmDAOImpl)db).findCategoriesById(id);
 			System.out.println("Delete node was called successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Delete node failed");
 		}
 		
 		if (success) {
-			mv.addObject("deletedFilm", deletedFilm);
-			mv.addObject("language", language);
+			redir.addFlashAttribute("deletedFilm", deletedFilm);
+			redir.addFlashAttribute("language", language);
+			redir.addFlashAttribute("categories", categories);
 		}
 		//Redirect to the GET confirmation page instead of resubmitting the form here
-		mv.setViewName("WEB-INF/views/deleteResult.jsp");
+		mv.setViewName("redirect:deleteConfirmation.do");
 		return mv;
 	}
 	
 	//Delete Form redirect to GET in order to prevent duplicate form submisisons
 	@RequestMapping(path="deleteConfirmation.do", method = RequestMethod.GET)
-	public String deleteConfirmation () {
+	public ModelAndView deleteConfirmation () {
+		ModelAndView mv = new ModelAndView();
 		
-		return "WEB-INF/views/home.jsp";
+		mv.setViewName("WEB-INF/views/deleteResult.jsp");
+		return mv;
 	}
 
 }

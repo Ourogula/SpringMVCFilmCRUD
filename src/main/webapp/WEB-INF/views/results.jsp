@@ -32,11 +32,9 @@
 				</c:if>
 				<c:if test="${film.categories != null }">
 				<li> Categories: </li>
-					<ul>
-						<c:forEach var="category" items="${film.categories }">
-							<li>${category }</li>
-						</c:forEach>
-					</ul>
+				<ul>
+							<li>${categories }</li>
+							</ul>
 				</c:if>
 				
 			</ul>

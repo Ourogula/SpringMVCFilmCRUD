@@ -52,7 +52,7 @@ public class FilmDAOImpl implements FilmDAO {
 			String rating = rs.getString("rating");
 			String features = rs.getString("special_features");
 			film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rate, length,
-					replacementCost, rating, features, findActorsByFilmId(filmId), findCategoriesByID(filmId));
+					replacementCost, rating, features, findActorsByFilmId(filmId), findCategoriesById(filmId));
 		}
 
 		rs.close();
@@ -67,8 +67,6 @@ public class FilmDAOImpl implements FilmDAO {
 		Film film = null;
 		String query = "%" + filmQuery + "%";
 
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
@@ -89,7 +87,7 @@ public class FilmDAOImpl implements FilmDAO {
 			String rating = rs.getString("rating");
 			String features = rs.getString("special_features");
 			film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rate, length,
-					replacementCost, rating, features, findActorsByFilmId(filmId), findCategoriesByID(filmId));
+					replacementCost, rating, features, findActorsByFilmId(filmId), findCategoriesById(filmId));
 			films.add(film);
 		}
 
@@ -102,8 +100,6 @@ public class FilmDAOImpl implements FilmDAO {
 	// Return a List of Films when given an Actor's ID, only used internally currently
 	public List<Film> findFilmsByActorId(int actorId) {
 		List<Film> films = new ArrayList<>();
-		String user = "student";
-		String pass = "student";
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -124,7 +120,7 @@ public class FilmDAOImpl implements FilmDAO {
 				String rating = rs.getString("rating");
 				String features = rs.getString("special_features");
 				Film film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rate, length,
-						reparationCost, rating, features, findActorsByFilmId(filmId), findCategoriesByID(filmId));
+						reparationCost, rating, features, findActorsByFilmId(filmId), findCategoriesById(filmId));
 				films.add(film);
 			}
 
@@ -141,9 +137,6 @@ public class FilmDAOImpl implements FilmDAO {
 	@Override
 	public Actor findActorById(int actorId) throws SQLException {
 		Actor actor = null;
-
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String sql = "SELECT * FROM actor WHERE id = ?";
@@ -201,8 +194,6 @@ public class FilmDAOImpl implements FilmDAO {
 
 	// Get Language name by Language_Id
 	public String findLanguageByID(int filmId) throws SQLException {
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String language = "";
@@ -217,26 +208,22 @@ public class FilmDAOImpl implements FilmDAO {
 		conn.close();
 		return language;
 	}
-
-	// Get Film Categories by ID
-	public List<String> findCategoriesByID(int filmId) throws SQLException {
-
-		String user = "student";
-		String pass = "student";
-		List<String> categories = new ArrayList<>();
-
+	
+	public String findCategoriesById(int filmId) throws SQLException {
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT category.name FROM category JOIN film_category ON film_category.category_id = category.id JOIN film ON film.id = film_category.film_id WHERE film.id = ?";
+		
+		String categories = "";
+		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.category_id JOIN film ON film.id = film_category.film_id WHERE film.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, filmId);
 		ResultSet rs = stmt.executeQuery();
+		
 		while (rs.next()) {
-			categories.add(rs.getString("category.name"));
+			categories += rs.getString("category.name");
 		}
 		rs.close();
 		stmt.close();
 		conn.close();
-
 		return categories;
 	}
 	
@@ -260,7 +247,7 @@ public class FilmDAOImpl implements FilmDAO {
 		    stmt.setDouble(8, film.getReplacementCost());
 		    stmt.setString(9, film.getRating());
 		    if (film.getCategories() != null) {
-		    stmt.setString(10, film.getCategories().toString());
+		    stmt.setString(10, film.getCategories());
 		    } else {
 		    	stmt.setString(10, null);
 		    }
@@ -307,12 +294,25 @@ public class FilmDAOImpl implements FilmDAO {
 		  try {
 		    conn = DriverManager.getConnection(URL, user, pass);
 		    conn.setAutoCommit(false); // START TRANSACTION
-		    String sql = "UPDATE film SET title=?, description=? "
+		    String sql = "UPDATE film SET title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=? "
 		               + " WHERE id=?";
 		    PreparedStatement stmt = conn.prepareStatement(sql);
 		    stmt.setString(1, film.getTitle());
 		    stmt.setString(2, film.getDescription());
-		    stmt.setInt(3, film.getFilmId());
+		    stmt.setShort(3, film.getReleaseYear());
+		    stmt.setInt(4, film.getLanguageId());
+		    stmt.setInt(5, film.getRentalDuration());
+		    stmt.setDouble(6, film.getRate());
+		    stmt.setInt(7, film.getLength());
+		    stmt.setDouble(8, film.getReplacementCost());
+		    stmt.setString(9, film.getRating());
+		    stmt.setString(10, film.getFeatures());
+//		    if (findFilmById(film.getFilmId()).getCategories() != null) {
+//		    	stmt.setString(12, findFilmById(film.getFilmId()).getCategories());
+//		    } else {
+//		    stmt.setString(12, film.getCategories());
+//		    }
+		    stmt.setInt(11, film.getFilmId());
 		    updateCount = stmt.executeUpdate();
 		    if (updateCount == 1) {
 		      // Replace actor's film list
@@ -327,6 +327,7 @@ public class FilmDAOImpl implements FilmDAO {
 		        stmt.setInt(2, actor.getId());
 		        updateCount = stmt.executeUpdate();
 		      }
+
 		      conn.commit();           // COMMIT TRANSACTION
 			  conn.close();
 		    }

@@ -36,9 +36,8 @@ Successfully deleted the following film from the film database:
 				<c:if test="${deletedFilm.categories != null }">
 				<li> Categories: </li>
 					<ul>
-						<c:forEach var="category" items="${film.categories }">
-							<li>${category }</li>
-						</c:forEach>
+						<li>${film.categories }"
+							</li>
 					</ul>
 				</c:if>
 				

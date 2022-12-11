@@ -33,14 +33,10 @@ Successfully updated the following film from the film database:
 						</c:forEach>
 					</ul>
 				</c:if>
-				<c:if test="${deletedFilm.categories != null }">
 				<li> Categories: </li>
-					<ul>
-						<c:forEach var="category" items="${film.categories }">
-							<li>${category }</li>
-						</c:forEach>
-					</ul>
-				</c:if>
+				<ul>
+							<li>${categories}</li>
+							</ul>
 				
 			</ul>
 		</c:when>
