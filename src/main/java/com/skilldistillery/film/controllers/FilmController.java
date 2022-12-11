@@ -27,32 +27,14 @@ public class FilmController {
 		return "WEB-INF/views/home.jsp";
 	}
 	
-	@RequestMapping(path="redirect.do", method = RequestMethod.POST)
-	public ModelAndView redirectWebpage (String query) {
-		ModelAndView mv = new ModelAndView();
-		boolean isNum = false;
-		List<Film> keywordQuery = new ArrayList<>();
-		int queryParse = 0;
-		Film film = null;
-		
-		try {
-			queryParse = Integer.parseInt(query);
-			isNum = true;
-		} catch (Exception e) {
-			try {
-			keywordQuery = db.findFilmsByQuery(query);
-			if (keywordQuery.size() == 1 && keywordQuery.get(0) != null) {
-				film = keywordQuery.get(0);
-			}}
-			catch (Exception other) {
-				other.printStackTrace();
-			}
-		}
-		
-		mv.addObject("film", film);
-		mv.setViewName("WEB-INF/views/redirect.jsp");
-		return mv;
-	}
+@RequestMapping(path="keyword.do")
+public String keywordPage() {
+	return "WEB-INF/views/keyword.jsp";
+}
+@RequestMapping(path="read.do")
+public String readPage() {
+	return "WEB-INF/views/read.jsp";
+}
 	
 	@ RequestMapping(path="delete.do")
 	public String deleteWebpage () {

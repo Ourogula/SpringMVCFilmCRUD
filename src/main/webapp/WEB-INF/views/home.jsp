@@ -11,19 +11,16 @@
 
 	<table>
 		<tr>
-			<td>Query the Film Database by ID</td>
-						<td><form action="redirect.do" method="POST">
-					<input type="text" name="query">
-					<input type="submit" value="submit">
-					</form></td>
+			<td><a href="read.do">Query the Film Database by ID</a></td>
+					
 		<tr>
 		<tr>
-			<td>Query the Film Database by Keyword
-			</td>
-					<td><form action="redirect.do" method="POST">
-					<input type="text" name="query">
-					<input type="submit" value="submit">
-					</form></td>
+			<td><a href="keyword.do">Query the Film Database by Keyword</a></td>
+				
+		<tr>
+		<tr>
+			<td><a href="insert.do">Insert Film into Database</a></td>
+				
 		<tr>
 	</table>
 </body>
