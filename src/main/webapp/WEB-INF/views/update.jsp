@@ -17,8 +17,8 @@
 		<input type="text" name="description" value="${updateFilm.description }"> <br> 
 		Release Year:
 		<input type="text" name="releaseYear" value="${updateFilm.releaseYear }"> <br> 
-		<label for="languageId">Language ID:</label> 
-				<select>
+		<label for="language">Language ID:</label> 
+				<select name="language">
 				  <option value="1">1: English</option>
 				  <option value="2">2: Italian</option>
 				  <option value="3">3: Japanese</option>
@@ -34,7 +34,7 @@
 		Replacement Cost: <input
 			type="text" name="replaceCost" value="${updateFilm.replacementCost }"> <br> 
 		<label for="rating">Rating:</label> 
-				<select>
+				<select name="rating">
 				  <option value="G" selected>G</option>
 				  <option value="PG">PG</option>
 				  <option value="PG13">PG-13</option>
