@@ -165,8 +165,6 @@ public class FilmDAOImpl implements FilmDAO {
 
 		List<Actor> actors = new ArrayList<>();
 
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String sql = "SELECT * FROM actor JOIN film_actor fact ON fact.actor_id = actor.id "

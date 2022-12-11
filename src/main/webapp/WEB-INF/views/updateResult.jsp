@@ -35,10 +35,9 @@ Successfully updated the following film from the film database:
 					</ul>
 				</c:if>
 				<li> Categories: </li>
-				<ul>
+					<ul>
 							<li>${updateFilm.categories}</li>
-							</ul>
-				
+					</ul>
 			</ul>
 		</c:when>
 		<c:otherwise>
