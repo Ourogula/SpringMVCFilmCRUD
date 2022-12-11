@@ -12,9 +12,9 @@
 <body>
 <div>
 		<h3>Search by Keyword</h3>
-		<form action="GetFilmData.do" method="get">
-			<label for="filmKeyword">Keyword: </label> 
-			<input type="text" name="filmKeyword" /><br> 
+		<form action="results.do" method="POST">
+			<label for="identifier">Keyword: </label> 
+			<input type="text" name="identifier" /><br> 
 			<input type="submit" value="Search" />
 		</form>
 	</div>

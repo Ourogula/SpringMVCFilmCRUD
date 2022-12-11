@@ -13,9 +13,9 @@
 	<!-- Story one search by ID -->
 	<div>
 		<h3>Search by Film ID</h3>
-		<form action="GetFilmData.do" method="get">
-			<label for="filmId">ID: </label> 
-			<input type="text" name="filmId" size="5" /><br> 
+		<form action="results.do" method="post">
+			<label for="identifier">ID: </label> 
+			<input type="text" name="identifier" size="5" /><br> 
 			<input type="submit" value="Search" />
 		</form>
 	</div>
