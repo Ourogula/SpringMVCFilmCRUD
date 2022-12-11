@@ -7,8 +7,8 @@
 
 <title>Add Film</title>
 
-<body>
-	<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: cover, center; "> 
+<body style="text-align:center;">
+	<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: center, center; height:500px; width:auto "> 
 		<h3 style="font-family:fantasy; color:gold;">Add New Film</h3>
 		<h4>Please provide the following details:</h4>
 		<form action="NewFilm.do" method="post">
@@ -25,10 +25,10 @@
 				  <option value="5">5: French</option>
 				  <option value="6">6: German</option>
 				</select><br>
-			<label for="rentalDuration">Rental Duration:</label> <input type="text" name="rentalDuration" size="4" value="3" /><br>
-			<label for="rentalRate">Rental Rate:</label> <input type="text" name="rentalRate" size="10" value="4.99" /><br> 
+			<label for="rentDur">Rental Duration:</label> <input type="text" name="rentDur" size="4" value="3" /><br>
+			<label for="rentRate">Rental Rate:</label> <input type="text" name="rentRate" size="10" value="4.99" /><br> 
 			<label for="length">Length:</label> <input type="text" name="length" size="4" /><br> 
-			<label for="replacementCost">Replacement Cost:</label> <input type="text" name="replacementCost" value="19.99" /><br> 
+			<label for="replaceCost">Replacement Cost:</label> <input type="text" name="replaceCost" value="19.99" /><br> 
 			<label for="rating">Rating:</label> 
 				<select name="rating">
 				
@@ -49,6 +49,7 @@
 			<input type="submit" value="Submit Update">
 			
 		</form>
+		
 	</div>
 	</body>
 	

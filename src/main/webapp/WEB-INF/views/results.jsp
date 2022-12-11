@@ -8,12 +8,12 @@
 <meta charset="UTF-8">
 <title>results</title>
 </head>
-<body>
-
+<body style="text-align:center;">
+<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: center, center; height:500px; width:auto "> 
 	<c:choose>
 		<c:when test="${film != null}">
-			<ul>
-				<li>ID: ${film.getFilmId()}</li>
+			<ul style="align-items:center;">
+				<li style="color:cornsilk;">ID: ${film.getFilmId()}</li>
 				<li>Title: ${film.getTitle()}</li>
 				<li>Description: ${ film.description}</li>
 				<li>Release Year: ${ film.releaseYear}</li>
@@ -41,10 +41,12 @@
 				
 			</ul>
 		</c:when>
-		<c:when test="${film == null && multiple == true}">
+		<c:when test="${film == null && multiple == true && addFilm == false}">
 			<h1>Your query found multiple matches. Please narrow the search to one Film. </h1>
+			
 		</c:when>
-		<c:when test="${film == null && multiple == false}">
+		
+		<c:when test="${film == null && multiple == false && addFilm == false}">
 			<h1>Your query did not find any matches </h1>
 		</c:when>
 		</c:choose>
@@ -60,5 +62,6 @@
 	</form>
 
 	<a href="home.do">Return Home</a>
+	</div>
 </body>
 </html>

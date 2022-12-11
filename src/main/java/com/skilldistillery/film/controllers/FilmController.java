@@ -42,6 +42,64 @@ public class FilmController {
 		return "WEB-INF/views/insert.jsp";
 	}
 
+	@RequestMapping(path = "NewFilm.do")
+	public ModelAndView newFilm(String id, String title, String description, String releaseYear,
+			String language, String rentDur, String rentRate, String length, String replaceCost, String rating,
+			String specFeatures, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		Film film = new Film();
+		boolean success = false;
+		
+		
+		short releaseYearNum = Short.parseShort(releaseYear);
+		int languageIdNum = Integer.parseInt(language);
+		int rentalDurationNum = Integer.parseInt(rentDur);
+		double rateNum = Double.parseDouble(rentRate);
+		int lengthNum = Integer.parseInt(length);
+		double replacementCostNum = Double.parseDouble(replaceCost);
+		String features;
+		if (specFeatures.length() > 12) {
+			features = (String) specFeatures.subSequence(0, specFeatures.length() - 12);
+		} else {
+			features = null;
+		}
+		List<Actor> actors = null;
+		
+		
+		
+		System.out.println(id);
+		
+	
+		film.setTitle(title);
+		film.setDescription(description);
+		film.setReleaseYear(releaseYearNum);
+		film.setLanguageId(languageIdNum);
+		film.setRentalDuration(rentalDurationNum);
+		film.setRate(rateNum);
+		film.setLength(lengthNum);
+		film.setReplacementCost(replacementCostNum);
+		film.setRating(rating);
+		film.setFeatures(features);
+		film.setActors(actors);
+		
+		try {
+			film = db.addFilm(film);
+			success=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		redir.addFlashAttribute("addFilm", true);
+		
+		redir.addFlashAttribute("success", success);
+		try {
+			redir.addFlashAttribute("film", film);
+		} catch (Exception o) {
+			o.printStackTrace();
+			
+		}
+		mv.setViewName("redirect:results.do");
+		return mv;
+	}
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
 	public ModelAndView updateFormId(String filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
@@ -163,7 +221,7 @@ public class FilmController {
 		return mv;
 	}
 
-	@RequestMapping(path = "results.do", method = RequestMethod.POST)
+	@RequestMapping(path = "results.do")
 	public ModelAndView queryResult(String identifier) {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;

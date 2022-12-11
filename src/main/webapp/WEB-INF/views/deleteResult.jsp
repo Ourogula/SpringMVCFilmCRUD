@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
+<body style="text-align:center;">
+<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: center, center; height:500px; width:auto "> 
 	<c:choose>
 		<c:when test="${not empty deletedFilm}">
 Successfully deleted the following film from the film database:
@@ -49,6 +49,6 @@ Failed to delete film from database. Please try again later.
 	</c:choose>
 	<br>
 	<a href="home.do">Return Home</a>
-
+</div>
 </body>
 </html>

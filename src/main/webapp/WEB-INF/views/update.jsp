@@ -9,6 +9,7 @@
 <title>Update Film in Database</title>
 </head>
 <body>
+<div style="background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-size: center, center; height:500px; width:auto "> 
 	Update ${updateFilm.filmId} in Database
 	<form action="updateForm.do" method="POST">
 		<input type="hidden" value="${updateFilm.filmId }" name="id">
@@ -51,5 +52,8 @@
 			
 			<input type="submit" value="Submit Update">
 	</form>
+
+</div>
 </body>
+
 </html>
