@@ -15,8 +15,9 @@
 			<label for="title">Title:</label> <input type="text" name="title" /><br>
 			<label for="description">Description:</label> <input type="text" name="description" /><br> 
 			<label for="releaseYear">Release Year:</label> <input type="text" name="releaseYear" size="4" /><br> 
-			<label for="languageId">Language ID:</label> 
-				<select>
+			<label for="language">Language ID:</label> 
+				<select name="language">
+	
 				  <option value="1">1: English</option>
 				  <option value="2">2: Italian</option>
 				  <option value="3">3: Japanese</option>
@@ -29,7 +30,8 @@
 			<label for="length">Length:</label> <input type="text" name="length" size="4" /><br> 
 			<label for="replacementCost">Replacement Cost:</label> <input type="text" name="replacementCost" value="19.99" /><br> 
 			<label for="rating">Rating:</label> 
-				<select>
+				<select name="rating">
+				
 				  <option value="G" selected>G</option>
 				  <option value="PG">PG</option>
 				  <option value="PG13">PG-13</option>
