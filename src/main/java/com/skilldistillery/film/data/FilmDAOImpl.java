@@ -349,6 +349,9 @@ public class FilmDAOImpl implements FilmDAO {
 	
 	// Delete a film
 	public boolean deleteFilm(Film film) {
+		if (film == null) {
+			return false;
+		}
 		  Connection conn = null;
 		  try {
 		    conn = DriverManager.getConnection(URL, user, pass);

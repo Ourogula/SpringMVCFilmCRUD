@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +9,9 @@
 <title>Delete a Film</title>
 </head>
 <body>
-	<h1>Film to delete:</h1>
-
-	<form action="deleteForm.do" method="POST">
-		<select>
-			<option value="title">Title</option>
-			<option value="id">ID</option>
-		</select>
-		<input type="text" name="response"/>
-		<input type="submit" value="Submit"/>
-	</form>
+Delete Film Form stub
+<form>
+<a href="deleteForm.do">Delete Form submission stub</a>
+</form>
 </body>
 </html>
