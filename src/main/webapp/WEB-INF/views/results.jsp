@@ -42,8 +42,8 @@
 			</ul>
 		
 	<br>
-	<form action="delete.do">Delete Film</form>
-	<form action="update.do">Update Film</form>
+	<form action="delete.do" value="${filmId}"><button type="button" onclick="">DELETE</button>Delete Film</form>
+	<form action="update.do" value="${filmId}"><button type="button" onclick="">UPDATE</button>>Update Film</form>
 	<a href="home.do">Return Home</a>
 </body>
 </html>
