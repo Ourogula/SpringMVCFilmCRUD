@@ -25,6 +25,23 @@ Successfully deleted the following film from the film database:
 				<li>Replacement Cost: ${ deletedFilm.replacementCost}</li>
 				<li>Rating: ${ deletedFilm.rating}</li>
 				<li>Special Features: ${ deletedFilm.features}</li>
+				<c:if test="${deletedFilm.actors != null }">
+				<li> Actors: </li>
+					<ul>
+						<c:forEach var="actor" items="${film.actors }">
+							<li>${actor.firstName } ${actor.lastName }</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<c:if test="${deletedFilm.categories != null }">
+				<li> Categories: </li>
+					<ul>
+						<c:forEach var="category" items="${film.categories }">
+							<li>${category }</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				
 			</ul>
 		</c:when>
 		<c:otherwise>

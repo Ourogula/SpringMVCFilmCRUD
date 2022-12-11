@@ -9,7 +9,7 @@
 <title>Delete a Film</title>
 </head>
 <body>
-Delete Film Form stub
+Delete a Film from the Database
 <form>
 <a href="deleteForm.do">Delete Form submission stub</a>
 </form>
