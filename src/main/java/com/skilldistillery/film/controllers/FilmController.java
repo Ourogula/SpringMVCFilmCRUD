@@ -46,11 +46,11 @@ public String readPage() {
 		return "WEB-INF/views/insert.jsp";
 	}
 	
-	@ RequestMapping(path="update.do", params="idQuery", method = RequestMethod.POST)
-	public ModelAndView updateFormId (String idQuery, RedirectAttributes redir) {
+	@ RequestMapping(path="update.do", method = RequestMethod.POST)
+	public ModelAndView updateFormId (String filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		Film updateFilm = null;
-		int id = Integer.parseInt(idQuery);
+		int id = Integer.parseInt(filmId);
 		
 		try {
 		updateFilm = db.findFilmById(id);

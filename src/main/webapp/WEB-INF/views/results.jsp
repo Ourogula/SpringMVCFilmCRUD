@@ -43,11 +43,14 @@
 		
 	<br>
 
-	<form action="delete.do">Delete Film:
+	<form action="delete.do" method="POST">Delete Film:
 	<input type="text" name="filmId" value="${film.filmId}">
 	<input type="submit" value="DELETE FROM DATABASE">
 	</form>
-	<form action="update.do">Update Film</form>
+	<form action="update.do" method="POST">Update Film: 
+	<input type="text" name="filmId" value="${film.filmId}">
+	<input type="submit" value="UPDATE FILM IN DATABASE">
+	</form>
 
 	<a href="home.do">Return Home</a>
 </body>
