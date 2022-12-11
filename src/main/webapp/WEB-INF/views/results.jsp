@@ -11,26 +11,26 @@
 <body>
 
 			<ul>
-				<li>ID: ${updateFilm.getFilmId()}</li>
-				<li>Title: ${updateFilm.getTitle()}</li>
-				<li>Description: ${ updateFilm.description}</li>
-				<li>Release Year: ${ updateFilm.releaseYear}</li>
+				<li>ID: ${film.getFilmId()}</li>
+				<li>Title: ${film.getTitle()}</li>
+				<li>Description: ${ film.description}</li>
+				<li>Release Year: ${ film.releaseYear}</li>
 				<li>Language: ${language}</li>
-				<li>Rental Duration: ${ updateFilm.rentalDuration}</li>
-				<li>Rental Rate: ${ updateFilm.rate}</li>
-				<li>Length: ${ updateFilm.length}</li>
-				<li>Replacement Cost: ${ updateFilm.replacementCost}</li>
-				<li>Rating: ${ updateFilm.rating}</li>
-				<li>Special Features: ${ updateFilm.features}</li>
-				<c:if test="${updateFilm.actors != null }">
+				<li>Rental Duration: ${ film.rentalDuration}</li>
+				<li>Rental Rate: ${ film.rate}</li>
+				<li>Length: ${ film.length}</li>
+				<li>Replacement Cost: ${ film.replacementCost}</li>
+				<li>Rating: ${ film.rating}</li>
+				<li>Special Features: ${ film.features}</li>
+				<c:if test="${film.actors != null }">
 				<li> Actors: </li>
 					<ul>
-						<c:forEach var="actor" items="${updateFilm.actors }">
+						<c:forEach var="actor" items="${film.actors }">
 							<li>${actor.firstName } ${actor.lastName }</li>
 						</c:forEach>
 					</ul>
 				</c:if>
-				<c:if test="${Film.categories != null }">
+				<c:if test="${film.categories != null }">
 				<li> Categories: </li>
 					<ul>
 						<c:forEach var="category" items="${film.categories }">
@@ -42,7 +42,10 @@
 			</ul>
 		
 	<br>
-	<form action="delete.do">Delete Film</form>
+	<form action="delete.do">Delete Film:
+	<input type="text" name="filmId" value="${film.filmId}">
+	<input type="submit" value="DELETE FROM DATABASE">
+	</form>
 	<form action="update.do">Update Film</form>
 	<a href="home.do">Return Home</a>
 </body>

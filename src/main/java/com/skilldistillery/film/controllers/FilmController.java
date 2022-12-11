@@ -155,6 +155,39 @@ public String readPage() {
 		return mv;
 	}
 	
+	@ RequestMapping(path="results.do", method = RequestMethod.POST)
+	public ModelAndView queryResult (String identifier) {
+		ModelAndView mv = new ModelAndView();
+		Film film = null;
+		
+		try {
+			int id = Integer.parseInt(identifier);
+			film = db.findFilmById(id);
+		} catch (Exception e){
+			try {
+				List<Film> films = db.findFilmsByQuery(identifier);
+				if (films.size() == 1 && films.get(0) != null) {
+					film = films.get(0);
+				}
+			} catch (Exception o) {
+				o.printStackTrace();
+			}
+		}
+		
+		try {
+			String language = ((FilmDAOImpl)db).findLanguageByID(film.getFilmId());
+			mv.addObject("language", language);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mv.addObject("film", film);
+		
+		mv.setViewName("WEB-INF/views/results.jsp");
+		return mv;
+	}
+	
 	@ RequestMapping(path="read.do", params="idQuery", method = RequestMethod.POST)
 	public String readFormId () {
 		return "WEB-INF/views/read.jsp";
