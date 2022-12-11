@@ -10,6 +10,8 @@
 </head>
 <body>
 
+	<c:choose>
+		<c:when test="${film != null}">
 			<ul>
 				<li>ID: ${film.getFilmId()}</li>
 				<li>Title: ${film.getTitle()}</li>
@@ -38,7 +40,14 @@
 				</c:if>
 				
 			</ul>
-		
+		</c:when>
+		<c:when test="${film == null && multiple == true}">
+			<h1>Your query found multiple matches. Please narrow the search to one Film. </h1>
+		</c:when>
+		<c:when test="${film == null && multiple == false}">
+			<h1>Your query did not find any matches </h1>
+		</c:when>
+		</c:choose>
 	<br>
 
 	<form action="delete.do" method="POST">Delete Film:

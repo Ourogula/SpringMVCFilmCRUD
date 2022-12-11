@@ -35,7 +35,7 @@ Successfully updated the following film from the film database:
 				</c:if>
 				<li> Categories: </li>
 				<ul>
-							<li>${categories}</li>
+							<li>${updateFilm.categories}</li>
 							</ul>
 				
 			</ul>
