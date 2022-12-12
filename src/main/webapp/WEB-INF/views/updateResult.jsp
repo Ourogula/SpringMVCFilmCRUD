@@ -22,7 +22,7 @@
 	<c:choose>
 		<c:when test="${success == true}">
 Successfully updated the following film from the film database:
-			<ul>
+			<ul style="color:deepskyblue">
 				<li>ID: ${updateFilm.getFilmId()}</li>
 				<li>Title: ${updateFilm.getTitle()}</li>
 				<li>Description: ${ updateFilm.description}</li>
