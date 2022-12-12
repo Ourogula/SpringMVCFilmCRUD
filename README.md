@@ -11,7 +11,7 @@ runs a simple film query where you are able to search through a database of film
 
 *Java *Spring Tool Suite/Eclipse *Gradle *Github *Object Oriented Design *SQL *Atom *MySQL Workbench *Tomcat *MAMP *Slack *HTML
 
-Maven,DAO
+Maven,DAO,bootstrap,
 
 
 # Lessons learned
