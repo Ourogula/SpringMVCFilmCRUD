@@ -13,12 +13,17 @@
 ">
 <head>
 <meta charset="UTF-8">
-<title>results</title>
+<title>Results</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
 <div style="text-align:center; background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-repeat:no-repeat; background-size:cover;">
+			<br /> <br /> <br /> <br />
+	
 	<c:choose>
+		<c:when test="${film.getFilmId() == 0 }">
+		Failed to insert Film into Database
+		</c:when>
 		<c:when test="${film != null}">
 			<ul style="text-align:center;">
 				<li style="color:cornsilk;">ID: ${film.getFilmId()}</li>
@@ -49,12 +54,12 @@
 				
 			</ul>
 		</c:when>
-		<c:when test="${film == null && multiple == true && addFilm == false}">
+		<c:when test="${film == null && multiple == true && success == false}">
 			<h1>Your query found multiple matches. Please narrow the search to one Film. </h1>
 			
 		</c:when>
 		
-		<c:when test="${film == null && multiple == false && addFilm == false}">
+		<c:when test="${film == null && multiple == false && success == false}">
 			<h1>Your query did not find any matches </h1>
 		</c:when>
 		</c:choose>

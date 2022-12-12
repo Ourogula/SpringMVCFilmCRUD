@@ -18,6 +18,7 @@
 	<div style="text-align:center; background-image: url('https://e0.pxfuel.com/wallpapers/917/663/desktop-wallpaper-displaying-18-for-movie-theater-background-for-your-mobile-tablet-explore-theater-background-home-theater-home-theater-for-movie-theater.jpg'); background-repeat:no-repeat; background-size:cover;">
 		<h3 style="font-family:fantasy; color:gold;">Add New Film</h3>
 		<h4 style="color:goldenrod"><i>Please provide the following details:</i></h4>
+		<br /><br /><br />
 		<form action="NewFilm.do" method="post"style="color:peru">
 			<label for="title">Title:</label> <input type="text" name="title" /><br>
 			<label for="description">Description:</label> <input type="text" name="description" /><br> 

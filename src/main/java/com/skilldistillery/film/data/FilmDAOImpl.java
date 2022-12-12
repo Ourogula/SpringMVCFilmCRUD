@@ -191,15 +191,16 @@ public class FilmDAOImpl implements FilmDAO {
 	}
 
 	// Get Language name by Language_Id
-	public String findLanguageByID(int filmId) throws SQLException {
+	public String findLanguageByID(int languageId) throws SQLException {
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String language = "";
-		String sql = "SELECT language.name FROM language JOIN film ON language.id = film.language_id";
+		String sql = "SELECT name FROM language WHERE language.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, languageId);
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()) {
-			language = rs.getString("language.name");
+			language = rs.getString("name");
 		}
 		rs.close();
 		stmt.close();
@@ -328,6 +329,7 @@ public class FilmDAOImpl implements FilmDAO {
 
 		      conn.commit();           // COMMIT TRANSACTION
 			  conn.close();
+			  success = true;
 		    }
 		  } catch (SQLException sqle) {
 		    sqle.printStackTrace();

@@ -49,38 +49,52 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Film film = new Film();
 		boolean success = false;
+		int filmId = 0;
+		short releaseYearNum = 0;
+		int languageIdNum = 0;
+		int rentalDurationNum = 0;
+		double rateNum = 0;
+		int lengthNum = 0;
+		double replacementCostNum = 0;
 		
+		if (!title.equalsIgnoreCase("")) {
+			film.setTitle(title); }
 		
-		short releaseYearNum = Short.parseShort(releaseYear);
-		int languageIdNum = Integer.parseInt(language);
-		int rentalDurationNum = Integer.parseInt(rentDur);
-		double rateNum = Double.parseDouble(rentRate);
-		int lengthNum = Integer.parseInt(length);
-		double replacementCostNum = Double.parseDouble(replaceCost);
+		if (!releaseYear.equalsIgnoreCase("")) {
+		releaseYearNum = Short.parseShort(releaseYear);
+		film.setReleaseYear(releaseYearNum);
+		
+		}
+		languageIdNum = Integer.parseInt(language);
+		film.setLanguageId(languageIdNum);
+		
+		if (!rentDur.equalsIgnoreCase("")) {
+		rentalDurationNum = Integer.parseInt(rentDur);
+		film.setRentalDuration(rentalDurationNum);
+		
+		}
+		if (!description.equalsIgnoreCase("")) {
+			film.setDescription(description);
+		}
+		if (!rentRate.equalsIgnoreCase("")) {
+		rateNum = Double.parseDouble(rentRate);
+		film.setRate(rateNum); }
+		
+		if (!length.equalsIgnoreCase("")) {
+		lengthNum = Integer.parseInt(length);
+		film.setLength(lengthNum); }
+		
+		if (!replaceCost.equalsIgnoreCase("")) {
+		replacementCostNum = Double.parseDouble(replaceCost);
+		film.setReplacementCost(replacementCostNum); }
+		
+		film.setRating(rating); 
+		
 		String features;
 		if (specFeatures.length() > 12) {
 			features = (String) specFeatures.subSequence(0, specFeatures.length() - 12);
-		} else {
-			features = null;
-		}
-		List<Actor> actors = null;
-		
-		
-		
-		System.out.println(id);
-		
-	
-		film.setTitle(title);
-		film.setDescription(description);
-		film.setReleaseYear(releaseYearNum);
-		film.setLanguageId(languageIdNum);
-		film.setRentalDuration(rentalDurationNum);
-		film.setRate(rateNum);
-		film.setLength(lengthNum);
-		film.setReplacementCost(replacementCostNum);
-		film.setRating(rating);
-		film.setFeatures(features);
-		film.setActors(actors);
+			film.setFeatures(features);
+		} 
 		
 		try {
 			film = db.addFilm(film);
@@ -91,13 +105,9 @@ public class FilmController {
 		redir.addFlashAttribute("addFilm", true);
 		
 		redir.addFlashAttribute("success", success);
-		try {
-			redir.addFlashAttribute("film", film);
-		} catch (Exception o) {
-			o.printStackTrace();
-			
-		}
-		mv.setViewName("redirect:results.do");
+		redir.addFlashAttribute("film", film);
+		
+		mv.setViewName("redirect:addResults.do");
 		return mv;
 	}
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
@@ -151,44 +161,68 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Film updateFilm = new Film();
 		boolean success = false;
-
-		int filmId = Integer.parseInt(id);
-		short releaseYearNum = Short.parseShort(releaseYear);
-		int languageIdNum = Integer.parseInt(language);
-		int rentalDurationNum = Integer.parseInt(rentDur);
-		double rateNum = Double.parseDouble(rentRate);
-		int lengthNum = Integer.parseInt(length);
-		double replacementCostNum = Double.parseDouble(replaceCost);
+		int filmId = 0;
+		short releaseYearNum = 0;
+		int languageIdNum = 0;
+		int rentalDurationNum = 0;
+		double rateNum = 0;
+		int lengthNum = 0;
+		double replacementCostNum = 0;
+		
+		filmId = Integer.parseInt(id);
+		updateFilm.setFilmId(filmId);
+		
+		if (!title.equalsIgnoreCase("")) {
+		updateFilm.setTitle(title); }
+		
+		if (!releaseYear.equalsIgnoreCase("")) {
+		releaseYearNum = Short.parseShort(releaseYear);
+		updateFilm.setReleaseYear(releaseYearNum);
+		
+		}
+		languageIdNum = Integer.parseInt(language);
+		updateFilm.setLanguageId(languageIdNum);
+		
+		if (!rentDur.equalsIgnoreCase("")) {
+		rentalDurationNum = Integer.parseInt(rentDur);
+		updateFilm.setRentalDuration(rentalDurationNum);
+		
+		}
+		if (!description.equalsIgnoreCase("")) {
+			updateFilm.setDescription(description);
+		}
+		if (!rentRate.equalsIgnoreCase("")) {
+		rateNum = Double.parseDouble(rentRate);
+		updateFilm.setRate(rateNum); }
+		
+		if (!length.equalsIgnoreCase("")) {
+		lengthNum = Integer.parseInt(length);
+		updateFilm.setLength(lengthNum); }
+		
+		if (!replaceCost.equalsIgnoreCase("")) {
+		replacementCostNum = Double.parseDouble(replaceCost);
+		updateFilm.setReplacementCost(replacementCostNum); }
+		
+		updateFilm.setRating(rating); 
+		
 		String features;
 		if (specFeatures.length() > 12) {
 			features = (String) specFeatures.subSequence(0, specFeatures.length() - 12);
-		} else {
-			features = null;
+			updateFilm.setFeatures(features);
 		}
+		
 		List<Actor> actors = null;
 		try {
 			actors = db.findActorsByFilmId(filmId);
+			updateFilm.setActors(actors);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(id);
-
-		updateFilm.setFilmId(filmId);
-		updateFilm.setTitle(title);
-		updateFilm.setDescription(description);
-		updateFilm.setReleaseYear(releaseYearNum);
-		updateFilm.setLanguageId(languageIdNum);
-		updateFilm.setRentalDuration(rentalDurationNum);
-		updateFilm.setRate(rateNum);
-		updateFilm.setLength(lengthNum);
-		updateFilm.setReplacementCost(replacementCostNum);
-		updateFilm.setRating(rating);
-		updateFilm.setFeatures(features);
-		updateFilm.setActors(actors);
-
 		try {
 			success = db.updateFilm(updateFilm);
+			language = ((FilmDAOImpl) db).findLanguageByID(languageIdNum);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -196,6 +230,7 @@ public class FilmController {
 		redir.addFlashAttribute("success", success);
 		try {
 			redir.addFlashAttribute("updateFilm", db.findFilmById(filmId));
+			redir.addFlashAttribute("language", language);
 		} catch (SQLException o) {
 			o.printStackTrace();
 		}
@@ -204,12 +239,12 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "updateFormResult.do", method = RequestMethod.GET)
-	public ModelAndView updateFormResult(Film updateFilm) {
+	public ModelAndView updateFormResult(Film updateFilm, boolean success, String language) {
 		ModelAndView mv = new ModelAndView();
 
 		try {
-			String language = ((FilmDAOImpl) db).findLanguageByID(updateFilm.getFilmId());
-			mv.addObject("language", language);
+//			String language = ((FilmDAOImpl) db).findLanguageByID(updateFilm.getFilmId());
+//			mv.addObject("language", language);
 			String categories = ((FilmDAOImpl) db).findCategoriesById(updateFilm.getFilmId());
 			mv.addObject("categories", categories);
 		} catch (SQLException e) {
@@ -217,14 +252,38 @@ public class FilmController {
 			e.printStackTrace();
 		}
 
+		System.out.println(success);
 		mv.setViewName("WEB-INF/views/updateResult.jsp");
 		return mv;
 	}
 
+	@RequestMapping(path = "addResults.do")
+	public ModelAndView addResult(Film film, boolean addFilm, boolean success) {
+		ModelAndView mv = new ModelAndView();
+		
+		if (film != null) {
+			try {
+				String language = ((FilmDAOImpl) db).findLanguageByID(film.getLanguageId());
+				mv.addObject("language", language);
+				String categories = ((FilmDAOImpl) db).findCategoriesById(film.getFilmId());
+				mv.addObject("categories", categories);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			mv.addObject("film", null);
+		}
+		
+		mv.setViewName("WEB-INF/views/results.jsp");
+		return mv;
+	}
+	
 	@RequestMapping(path = "results.do")
 	public ModelAndView queryResult(String identifier) {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;
+		boolean success = false;
 
 		try {
 			int id = Integer.parseInt(identifier);
@@ -234,6 +293,7 @@ public class FilmController {
 				List<Film> films = db.findFilmsByQuery(identifier);
 				if (films.size() == 1 && films.get(0) != null) {
 					film = films.get(0);
+					success = true;
 					mv.addObject("multiple", false);
 				} else if (films.size() > 0){
 					mv.addObject("multiple", true);
@@ -246,7 +306,7 @@ public class FilmController {
 		}
 		if (film != null) {
 			try {
-				String language = ((FilmDAOImpl) db).findLanguageByID(film.getFilmId());
+				String language = ((FilmDAOImpl) db).findLanguageByID(film.getLanguageId());
 				mv.addObject("language", language);
 				String categories = ((FilmDAOImpl) db).findCategoriesById(film.getFilmId());
 				mv.addObject("categories", categories);
@@ -259,6 +319,7 @@ public class FilmController {
 			mv.addObject("film", null);
 		}
 
+		mv.addObject("success", success);
 		mv.setViewName("WEB-INF/views/results.jsp");
 		return mv;
 	}
@@ -268,16 +329,22 @@ public class FilmController {
 	public ModelAndView deleteForm(String filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		boolean success = false;
-		int id = Integer.parseInt(filmId);
 		Film deletedFilm = null;
+		int id = 0;
 		String language = "";
 		String categories = "";
 		try {
+			id = Integer.parseInt(filmId);
 			deletedFilm = db.findFilmById(id);
+			if (deletedFilm != null) {
 			success = db.deleteFilm(deletedFilm);
-			language = ((FilmDAOImpl) db).findLanguageByID(id);
+			language = ((FilmDAOImpl) db).findLanguageByID(deletedFilm.getLanguageId());
+			System.out.println(language);
 			categories = ((FilmDAOImpl) db).findCategoriesById(id);
 			System.out.println("Delete node was called successfully");
+			} else {
+				System.out.println("Invalid film id provided");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Delete node failed");
@@ -295,7 +362,7 @@ public class FilmController {
 
 	// Delete Form redirect to GET in order to prevent duplicate form submisisons
 	@RequestMapping(path = "deleteConfirmation.do", method = RequestMethod.GET)
-	public ModelAndView deleteConfirmation() {
+	public ModelAndView deleteConfirmation(String language, String categories, Film deletedFilm) {
 		ModelAndView mv = new ModelAndView();
 
 		mv.setViewName("WEB-INF/views/deleteResult.jsp");
