@@ -284,18 +284,21 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;
 		boolean success = false;
+		List<Film> films = null;
 
 		try {
 			int id = Integer.parseInt(identifier);
 			film = db.findFilmById(id);
 		} catch (Exception e) {
 			try {
-				List<Film> films = db.findFilmsByQuery(identifier);
+				films = db.findFilmsByQuery(identifier);
 				if (films.size() == 1 && films.get(0) != null) {
 					film = films.get(0);
 					success = true;
 					mv.addObject("multiple", false);
 				} else if (films.size() > 0){
+					success = true;
+					mv.addObject("filmList", films);
 					mv.addObject("multiple", true);
 				} else {
 					mv.addObject("multiple", false);
@@ -319,6 +322,7 @@ public class FilmController {
 			mv.addObject("film", null);
 		}
 
+		mv.addObject("identifier", identifier);
 		mv.addObject("success", success);
 		mv.setViewName("WEB-INF/views/results.jsp");
 		return mv;
@@ -329,12 +333,19 @@ public class FilmController {
 	public ModelAndView deleteForm(String filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		boolean success = false;
+		boolean isNum = false;
 		Film deletedFilm = null;
 		int id = 0;
 		String language = "";
 		String categories = "";
 		try {
-			id = Integer.parseInt(filmId);
+		id = Integer.parseInt(filmId);
+		isNum = true;
+		} catch (NumberFormatException numEx) {
+			numEx.printStackTrace();
+		}
+		if (isNum) {
+		try {
 			deletedFilm = db.findFilmById(id);
 			if (deletedFilm != null) {
 			success = db.deleteFilm(deletedFilm);
@@ -348,7 +359,7 @@ public class FilmController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Delete node failed");
-		}
+		}}
 
 		if (success) {
 			redir.addFlashAttribute("deletedFilm", deletedFilm);
